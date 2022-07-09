@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::get();
+        $users = User::where('name', 'LIKE', "%{$request->search}%")->get();
 
         return view('users.index', compact('users'));
     }
